@@ -41,7 +41,7 @@ namespace Functions
         public static IActionResult GetToDos(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "todos")] HttpRequest req, ILogger log)
         {
-            log.LogInformation("Getting todo list items");
+            log.LogInformation("Getting all todo items");
             return new OkObjectResult(items);
         }
 
@@ -50,6 +50,8 @@ namespace Functions
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "todos/{id}")] HttpRequest req,
             ILogger log, string id)
         {
+            log.LogInformation($"Getting todo with the id {id}");
+
             var todo = items.FirstOrDefault(t => t.Id == id);
             if (todo == null)
             {

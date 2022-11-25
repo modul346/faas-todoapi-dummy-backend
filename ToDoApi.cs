@@ -25,7 +25,7 @@ namespace Functions
 
         [FunctionName("CreateToDo")]
         public static async Task<IActionResult> CreateToDo(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "todo")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "todos")] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("Creating a new todo list item");
@@ -39,7 +39,7 @@ namespace Functions
 
         [FunctionName("GetToDos")]
         public static IActionResult GetToDos(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "todo")] HttpRequest req, ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "todos")] HttpRequest req, ILogger log)
         {
             log.LogInformation("Getting todo list items");
             return new OkObjectResult(items);
@@ -47,7 +47,7 @@ namespace Functions
 
         [FunctionName("GetTodoById")]
         public static IActionResult GetTodoById(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "todo/{id}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "todos/{id}")] HttpRequest req,
             ILogger log, string id)
         {
             var todo = items.FirstOrDefault(t => t.Id == id);
@@ -60,7 +60,7 @@ namespace Functions
 
         [FunctionName("UpdateTodo")]
         public static async Task<IActionResult> UpdateTodo(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "todo/{id}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "todos/{id}")] HttpRequest req,
             ILogger log, string id)
         {
             log.LogInformation($"Updating todo with the id {id}");
@@ -86,7 +86,7 @@ namespace Functions
 
         [FunctionName("DeleteTodo")]
         public static IActionResult DeleteTodo(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "todo/{id}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "todos/{id}")] HttpRequest req,
             ILogger log, string id)
         {
             log.LogInformation($"Deleting todo with the id {id}");
